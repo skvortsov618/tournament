@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Playoff{% endblock %}
+
+{% block body %}
+    <h1>Playoff</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ playoff.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('playoff_index') }}">back to list</a>
+
+    <a href="{{ path('playoff_edit', {'id': playoff.id}) }}">edit</a>
+
+    {{ include('playoff/_delete_form.html.twig') }}
+{% endblock %}

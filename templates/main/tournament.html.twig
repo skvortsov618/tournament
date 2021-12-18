@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournament {{ id }}{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>{{ name }}</h1>
+    <a href="/playdivisions/{{ id }}">PLAY DIVISIONS</a>
+    <a href="/playquarters/{{ id }}">PLAY PLAYOFF QUARTERS</a>
+    <a href="/playhalfs/{{ id }}">PLAY PLAYOFF HALFS</a>
+    <a href="/playfinal/{{ id }}">PLAY FINAL</a>
+    <div>
+        <h2>DIVISION A</h2>
+        <table>
+            <tr>
+                <th></th>
+                {% for team in teamsA %}
+                    <th>{{ team.getTeamName() }}</th>
+                {% endfor %}
+                <th>RESULT</th>
+            </tr>
+            {% for team in teamsA %}
+                <tr>
+                    <td>{{ team }}</td>
+                    {% for game in team.games %}
+                        {% if (game!=null) %}
+                            <td><a href="/game/{{ game.getID }}">{{ game }}</a></td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ team.result }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div>
+        <h2>DIVISION B</h2>
+        <table>
+            <tr>
+                <th></th>
+                {% for team in teamsB %}
+                    <th>{{ team.getTeamName() }}</th>
+                {% endfor %}
+                <th>RESULT</th>
+            </tr>
+            {% for team in teamsB %}
+                <tr>
+                    <td>{{ team }}</td>
+                    {% for game in team.games %}
+                        {% if (game!=null) %}
+                            <td><a href="/game/{{ game.getID }}">{{ game }}</a></td>
+                        {% else %}
+                            <td>{{ game }}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td>{{ team.result }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% if (playoff.getTeams.getValues!=[]) %}
+        <div>
+            <h2>PLAYOFF</h2>
+            <div style="display: flex; flex-direction: row">
+                <div style="margin: 20px">
+                    <div>{{ playoff.getQuarter1 }}</div>
+                    <div>{{ playoff.getQuarter2 }}</div>
+                    <div>{{ playoff.getQuarter3 }}</div>
+                    <div>{{ playoff.getQuarter4 }}</div>
+                </div>
+                <div style="margin: 20px">
+                    <div>{{ playoff.getHalf1 }}</div>
+                    <div>{{ playoff.getHalf2 }}</div>
+                </div>
+                <div style="margin: 20px">
+                    <div>{{ playoff.final }}</div>
+                </div>
+            </div>
+        </div>
+        {% if (winner!= "") %}
+            <div>
+                <h2>WINNER IS {{ winner }}</h2>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}

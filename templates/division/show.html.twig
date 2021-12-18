@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Division{% endblock %}
+
+{% block body %}
+    <h1>Division</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ division.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('division_index') }}">back to list</a>
+
+    <a href="{{ path('division_edit', {'id': division.id}) }}">edit</a>
+
+    {{ include('division/_delete_form.html.twig') }}
+{% endblock %}

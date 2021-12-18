@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Division{% endblock %}
+
+{% block body %}
+    <h1>Edit Division</h1>
+
+    {{ include('division/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('division_index') }}">back to list</a>
+
+    {{ include('division/_delete_form.html.twig') }}
+{% endblock %}
